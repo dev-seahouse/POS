@@ -1,3 +1,5 @@
+## [Live Demo](https://pos-pt6u-kenans-projects-03b0f583.vercel.app/)
+
 ## how to run
 ```
 npm install
