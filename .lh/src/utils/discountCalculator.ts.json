@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/utils/discountCalculator.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1717234889741,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1717234889741,
+            "name": "Commit-0",
+            "content": "import type { Product } from \"../components/product/product.types\";\nimport type { Discount } from \"./discount/discount.types\";\nimport { getDiscountStrategy } from \"./discount/discountStrategies\";\n\ninterface Totals {\n  total: number;\n  discountAmount: number;\n  finalTotal: number;\n}\n\nconst calculateTotal = (cart: Product[]): number =>\n  cart.reduce((sum, product) => sum + product.price * product.quantity, 0);\n\nconst calculateDiscount = (cart: Product[], discount: Discount): Totals => {\n  const total = calculateTotal(cart);\n  const discountStrategy = getDiscountStrategy(discount);\n  const discountAmount = discountStrategy(cart, discount.value, discount);\n\n  return {\n    total,\n    discountAmount,\n    finalTotal: total - discountAmount,\n  };\n};\n\nexport default calculateDiscount;\n"
+        }
+    ]
+}

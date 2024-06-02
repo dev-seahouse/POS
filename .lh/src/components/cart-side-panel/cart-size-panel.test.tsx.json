@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/components/cart-side-panel/cart-size-panel.test.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1717235132416,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717235157158,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,21 @@\n import React from \"react\";\n \n-import { fireEvent, render, screen } from \"@testing-library/react\";\n+import {\n+  expect,\n+  test,\n+} from \"vitest\";\n \n-import { Discount, Product } from \"../types\";\n+import {\n+  fireEvent,\n+  render,\n+  screen,\n+} from \"@testing-library/react\";\n+\n+import {\n+  Discount,\n+  Product,\n+} from \"../types\";\n import CartSidePanel from \"./CartSidePanel\";\n \n const products: Product[] = [\n   { id: 1, name: \"Apple\", price: 1.0, quantity: 2, productId: \"apple\" },\n@@ -26,18 +38,18 @@\n   },\n };\n \n jest.mock(\"../store/cartStore\", () => {\n-  const originalModule = jest.requireActual(\"../store/cartStore\");\n+  const originalModule = vi.requireActual(\"../store/cartStore\");\n   return {\n     __esModule: true,\n     ...originalModule,\n-    default: jest.fn(() => ({\n+    default: vi.fn(() => ({\n       cart: new Map(products.map((p) => [p.id, p])),\n-      removeProduct: jest.fn(),\n-      updateProductQuantity: jest.fn(),\n+      removeProduct: vi.fn(),\n+      updateProductQuantity: vi.fn(),\n       cartOpen: true,\n-      toggleCart: jest.fn(),\n+      toggleCart: vi.fn(),\n     })),\n   };\n });\n \n"
+                },
+                {
+                    "date": 1717235165293,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,22 @@\n import React from \"react\";\n \n-import { expect, test } from \"vitest\";\n+import {\n+  expect,\n+  test,\n+  vi,\n+} from \"vitest\";\n \n-import { fireEvent, render, screen } from \"@testing-library/react\";\n+import {\n+  fireEvent,\n+  render,\n+  screen,\n+} from \"@testing-library/react\";\n \n-import { Discount, Product } from \"../types\";\n+import {\n+  Discount,\n+  Product,\n+} from \"../types\";\n import CartSidePanel from \"./CartSidePanel\";\n \n const products: Product[] = [\n   { id: 1, name: \"Apple\", price: 1.0, quantity: 2, productId: \"apple\" },\n"
+                }
+            ],
+            "date": 1717235132416,
+            "name": "Commit-0",
+            "content": "import React from \"react\";\n\nimport {\n  fireEvent,\n  render,\n  screen,\n} from \"@testing-library/react\";\n\nimport {\n  Discount,\n  Product,\n} from \"../types\";\nimport CartSidePanel from \"./CartSidePanel\";\n\nconst products: Product[] = [\n  { id: 1, name: \"Apple\", price: 1.0, quantity: 2, productId: \"apple\" },\n  { id: 2, name: \"Orange\", price: 1.2, quantity: 3, productId: \"orange\" },\n];\n\nconst discountCodes: { [code: string]: Discount } = {\n  OVERALL10: { type: \"overall\", value: 0.1, applicableToAll: true },\n  BOGOFAPPLE: {\n    type: \"bogof\",\n    value: 0,\n    applicableToAll: false,\n    applicableProductIds: [\"apple\"],\n  },\n  THRESHOLD50: {\n    type: \"threshold\",\n    value: 50,\n    threshold: 200,\n    applicableToAll: true,\n  },\n};\n\njest.mock(\"../store/cartStore\", () => {\n  const originalModule = jest.requireActual(\"../store/cartStore\");\n  return {\n    __esModule: true,\n    ...originalModule,\n    default: jest.fn(() => ({\n      cart: new Map(products.map((p) => [p.id, p])),\n      removeProduct: jest.fn(),\n      updateProductQuantity: jest.fn(),\n      cartOpen: true,\n      toggleCart: jest.fn(),\n    })),\n  };\n});\n\ntest(\"renders cart items and applies discount code\", () => {\n  render(<CartSidePanel discountCodes={discountCodes} />);\n\n  products.forEach((product) => {\n    expect(screen.getByText(product.name)).toBeInTheDocument();\n    expect(\n      screen.getByText(`$${product.price.toFixed(2)} x ${product.quantity}`),\n    ).toBeInTheDocument();\n  });\n\n  fireEvent.change(screen.getByPlaceholderText(\"Enter discount code\"), {\n    target: { value: \"OVERALL10\" },\n  });\n  fireEvent.click(screen.getByText(\"Apply Discount\"));\n\n  expect(screen.getByText(\"Discount: $0.00\")).toBeInTheDocument(); // adjust based on discount logic\n  expect(screen.getByText(\"Final Total:\")).toBeInTheDocument(); // adjust based on discount logic\n});\n"
+        }
+    ]
+}

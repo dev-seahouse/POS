@@ -1,0 +1,30 @@
+{
+    "sourceFile": "src/mocks/dicscountCodes.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1717234944799,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717234953863,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import type { Discount } from \"../components/discount/discount.types\";\n+import type { Discount } from \"../../components/discount/discount.types\";\n \n export const discountCodes: { [code: string]: Discount } = {\n   OVERALL10: { type: \"overall\", value: 0.1, applicableToAll: true },\n   BOGOFAPPLE: {\n"
+                },
+                {
+                    "date": 1717234960831,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import type { Discount } from \"../../../components/discount/discount.types\";\n+import type { Discount } from \"../../../../components/discount/discount.types\";\n \n export const discountCodes: { [code: string]: Discount } = {\n   OVERALL10: { type: \"overall\", value: 0.1, applicableToAll: true },\n   BOGOFAPPLE: {\n"
+                },
+                {
+                    "date": 1717234995146,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n+import type { Discount } from \"../../utils/discount/discount.types\";\n \n export const discountCodes: { [code: string]: Discount } = {\n   OVERALL10: { type: \"overall\", value: 0.1, applicableToAll: true },\n   BOGOFAPPLE: {\n"
+                }
+            ],
+            "date": 1717234944799,
+            "name": "Commit-0",
+            "content": "import type { Discount } from \"../components/discount/discount.types\";\n\nexport const discountCodes: { [code: string]: Discount } = {\n  OVERALL10: { type: \"overall\", value: 0.1, applicableToAll: true },\n  BOGOFAPPLE: {\n    type: \"bogof\",\n    value: 0,\n    applicableToAll: false,\n    applicableProductIds: [\"apple\"],\n  },\n  THRESHOLD50: {\n    type: \"threshold\",\n    value: 50,\n    threshold: 200,\n    applicableToAll: true,\n  },\n};\n"
+        }
+    ]
+}

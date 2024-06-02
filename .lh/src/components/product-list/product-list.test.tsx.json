@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/components/product-list/product-list.test.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1717235047917,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717235054325,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,14 @@\n import React from \"react\";\n \n-import { fireEvent, render, screen } from \"@testing-library/react\";\n+import { test } from \"vitest\";\n \n+import {\n+  fireEvent,\n+  render,\n+  screen,\n+} from \"@testing-library/react\";\n+\n import { Product } from \"../types\";\n import ProductList from \"./ProductList\";\n \n const products: Product[] = [\n"
+                },
+                {
+                    "date": 1717235067354,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n   { id: 3, name: \"Banana\", price: 0.8, quantity: 1, productId: \"banana\" },\n ];\n \n test(\"renders product list and adds a product to cart\", () => {\n-  const handleAddToCart = jest.fn();\n+  const handleAddToCart = vi.fn();\n   render(<ProductList products={products} onAddToCart={handleAddToCart} />);\n \n   products.forEach((product) => {\n     expect(screen.getByText(product.name)).toBeInTheDocument();\n"
+                }
+            ],
+            "date": 1717235047917,
+            "name": "Commit-0",
+            "content": "import React from \"react\";\n\nimport {\n  fireEvent,\n  render,\n  screen,\n} from \"@testing-library/react\";\n\nimport { Product } from \"../types\";\nimport ProductList from \"./ProductList\";\n\nconst products: Product[] = [\n  { id: 1, name: \"Apple\", price: 1.0, quantity: 1, productId: \"apple\" },\n  { id: 2, name: \"Orange\", price: 1.2, quantity: 1, productId: \"orange\" },\n  { id: 3, name: \"Banana\", price: 0.8, quantity: 1, productId: \"banana\" },\n];\n\ntest(\"renders product list and adds a product to cart\", () => {\n  const handleAddToCart = jest.fn();\n  render(<ProductList products={products} onAddToCart={handleAddToCart} />);\n\n  products.forEach((product) => {\n    expect(screen.getByText(product.name)).toBeInTheDocument();\n    expect(\n      screen.getByText(`$${product.price.toFixed(2)}`),\n    ).toBeInTheDocument();\n  });\n\n  fireEvent.click(screen.getAllByText(\"Add to Cart\")[0]);\n  expect(handleAddToCart).toHaveBeenCalledWith(products[0]);\n});\n"
+        }
+    ]
+}

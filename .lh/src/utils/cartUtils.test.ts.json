@@ -1,0 +1,42 @@
+{
+    "sourceFile": "src/utils/cartUtils.test.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1717335216027,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717335225164,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,11 @@\n+import type { Product } from \"src/components/product/product.types\";\n import {\n   describe,\n   expect,\n   it,\n } from \"vitest\";\n \n-import { Product } from \"../types\";\n import {\n   addToCart,\n   removeFromCart,\n } from \"./cartUtils\";\n"
+                },
+                {
+                    "date": 1717335231593,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,11 @@\n-import type { Product } from \"src/components/product/product.types\";\n import {\n   describe,\n   expect,\n   it,\n } from \"vitest\";\n \n+import type { Product } from \"../components/product/product.types\";\n import {\n   addToCart,\n   removeFromCart,\n } from \"./cartUtils\";\n"
+                },
+                {
+                    "date": 1717335395968,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n     let cart = new Map<number, Product>();\n     cart = addToCart(cart, product1);\n     cart = addToCart(cart, product2);\n     const updatedCart = removeFromCart(cart, product1);\n-    expect(updatedCart.get(product1.id)?.quantity).toBe(1);\n+    expect(updatedCart.has(product1))\n     const updatedCart2 = removeFromCart(updatedCart, product1);\n     expect(updatedCart2.has(product1.id)).toBe(false);\n   });\n });\n"
+                },
+                {
+                    "date": 1717335420047,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n     let cart = new Map<number, Product>();\n     cart = addToCart(cart, product1);\n     cart = addToCart(cart, product2);\n     const updatedCart = removeFromCart(cart, product1);\n-    expect(updatedCart.has(product1))\n+    expect(updatedCart.has(product1.id)).toBe(false);\n     const updatedCart2 = removeFromCart(updatedCart, product1);\n     expect(updatedCart2.has(product1.id)).toBe(false);\n   });\n });\n"
+                },
+                {
+                    "date": 1717335425746,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,8 +39,9 @@\n     cart = addToCart(cart, product1);\n     cart = addToCart(cart, product2);\n     const updatedCart = removeFromCart(cart, product1);\n     expect(updatedCart.has(product1.id)).toBe(false);\n+\n     const updatedCart2 = removeFromCart(updatedCart, product1);\n     expect(updatedCart2.has(product1.id)).toBe(false);\n   });\n });\n"
+                },
+                {
+                    "date": 1717335440793,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,8 +40,8 @@\n     cart = addToCart(cart, product2);\n     const updatedCart = removeFromCart(cart, product1);\n     expect(updatedCart.has(product1.id)).toBe(false);\n \n-    const updatedCart2 = removeFromCart(updatedCart, product1);\n-    expect(updatedCart2.has(product1.id)).toBe(false);\n+    const updatedCart2 = removeFromCart(updatedCart, product2);\n+    expect(updatedCart2.has(product2.id)).toBe(false);\n   });\n });\n"
+                }
+            ],
+            "date": 1717335216027,
+            "name": "Commit-0",
+            "content": "import {\n  describe,\n  expect,\n  it,\n} from \"vitest\";\n\nimport { Product } from \"../types\";\nimport {\n  addToCart,\n  removeFromCart,\n} from \"./cartUtils\";\n\nconst product1: Product = {\n  id: 1,\n  name: \"Apple\",\n  price: 1.0,\n  quantity: 1,\n  productId: \"apple\",\n};\nconst product2: Product = {\n  id: 2,\n  name: \"Orange\",\n  price: 1.2,\n  quantity: 1,\n  productId: \"orange\",\n};\n\ndescribe(\"cartUtils\", () => {\n  it(\"adds product to cart\", () => {\n    const cart = new Map<number, Product>();\n    const updatedCart = addToCart(cart, product1);\n    expect(updatedCart.get(product1.id)?.quantity).toBe(1);\n    const updatedCart2 = addToCart(updatedCart, product1);\n    expect(updatedCart2.get(product1.id)?.quantity).toBe(2);\n  });\n\n  it(\"removes product from cart\", () => {\n    let cart = new Map<number, Product>();\n    cart = addToCart(cart, product1);\n    cart = addToCart(cart, product2);\n    const updatedCart = removeFromCart(cart, product1);\n    expect(updatedCart.get(product1.id)?.quantity).toBe(1);\n    const updatedCart2 = removeFromCart(updatedCart, product1);\n    expect(updatedCart2.has(product1.id)).toBe(false);\n  });\n});\n"
+        }
+    ]
+}

@@ -1,0 +1,54 @@
+{
+    "sourceFile": "src/utils/discount/discountCalculator.test.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 9,
+            "patches": [
+                {
+                    "date": 1717335087956,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717335811683,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n     const { discountAmount, finalTotal } = calculateDiscount(\n       cart,\n       overallDiscount,\n     );\n-    expect(discountAmount).toBeCloseTo(0.34); // 10% of total\n+    expect(discountAmount).toBeCloseTo(0.32); // 10% of total\n     expect(finalTotal).toBeCloseTo(3.06); // total - discount\n   });\n \n   it(\"calculates threshold discount\", () => {\n"
+                },
+                {
+                    "date": 1717335823013,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n       cart,\n       overallDiscount,\n     );\n     expect(discountAmount).toBeCloseTo(0.32); // 10% of total\n-    expect(finalTotal).toBeCloseTo(3.06); // total - discount\n+    expect(finalTotal).toBeCloseTo(2.88); // total - discount\n   });\n \n   it(\"calculates threshold discount\", () => {\n     const { discountAmount, finalTotal } = calculateDiscount(\n"
+                },
+                {
+                    "date": 1717336094220,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,9 +47,9 @@\n     const { discountAmount, finalTotal } = calculateDiscount(\n       cart,\n       thresholdDiscount,\n     );\n-    expect(discountAmount).toBe(50);\n+    expect(discountAmount).toBe(0);\n     expect(finalTotal).toBe(0); // total is less than threshold\n   });\n \n   it(\"calculates BOGOF discount\", () => {\n"
+                },
+                {
+                    "date": 1717336129281,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n   applicableToAll: true,\n };\n const thresholdDiscount: Discount = {\n   type: \"threshold\",\n-  value: 50,\n+  value: 1,\n   threshold: 2,\n   applicableToAll: true,\n };\n const bogofDiscount: Discount = {\n"
+                },
+                {
+                    "date": 1717336181060,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,9 @@\n   applicableProductIds: [\"apple\"],\n };\n \n describe(\"calculateDiscount\", () => {\n-  it(\"calculates overall discount\", () => {\n+  it(\"calculates overall discount: buy \", () => {\n     const { discountAmount, finalTotal } = calculateDiscount(\n       cart,\n       overallDiscount,\n     );\n"
+                },
+                {
+                    "date": 1717336205307,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,18 +33,18 @@\n   applicableProductIds: [\"apple\"],\n };\n \n describe(\"calculateDiscount\", () => {\n-  it(\"calculates overall discount: buy \", () => {\n+  it(\"calculates overall discount: 10% off\", () => {\n     const { discountAmount, finalTotal } = calculateDiscount(\n       cart,\n       overallDiscount,\n     );\n     expect(discountAmount).toBeCloseTo(0.32); // 10% of total\n     expect(finalTotal).toBeCloseTo(2.88); // total - discount\n   });\n \n-  it(\"calculates threshold discount\", () => {\n+  it(\"calculates threshold discount: 2 dollar get 1 dollar off\", () => {\n     const { discountAmount, finalTotal } = calculateDiscount(\n       cart,\n       thresholdDiscount,\n     );\n"
+                },
+                {
+                    "date": 1717336268236,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,14 +42,14 @@\n     expect(discountAmount).toBeCloseTo(0.32); // 10% of total\n     expect(finalTotal).toBeCloseTo(2.88); // total - discount\n   });\n \n-  it(\"calculates threshold discount: 2 dollar get 1 dollar off\", () => {\n+  it(\"calculates threshold discount: > 2 dollar get 1 dollar off\", () => {\n     const { discountAmount, finalTotal } = calculateDiscount(\n       cart,\n       thresholdDiscount,\n     );\n-    expect(discountAmount).toBe(0);\n+    expect(discountAmount).toBe(1);\n     expect(finalTotal).toBe(0); // total is less than threshold\n   });\n \n   it(\"calculates BOGOF discount\", () => {\n"
+                },
+                {
+                    "date": 1717336282024,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -48,9 +48,9 @@\n       cart,\n       thresholdDiscount,\n     );\n     expect(discountAmount).toBe(1);\n-    expect(finalTotal).toBe(0); // total is less than threshold\n+    expect(finalTotal).toBe(2.2); // total is less than threshold\n   });\n \n   it(\"calculates BOGOF discount\", () => {\n     const { discountAmount, finalTotal } = calculateDiscount(\n"
+                },
+                {
+                    "date": 1717336341840,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,7 +57,7 @@\n       cart,\n       bogofDiscount,\n     );\n     expect(discountAmount).toBe(1.0); // buy one get one free for apple\n-    expect(finalTotal).toBeCloseTo(1.2); // total - discount\n+    expect(finalTotal).toBeCloseTo(2.2); // total - discount\n   });\n });\n"
+                }
+            ],
+            "date": 1717335087956,
+            "name": "Commit-0",
+            "content": "import {\n  describe,\n  expect,\n  it,\n} from \"vitest\";\n\nimport {\n  Discount,\n  Product,\n} from \"../types\";\nimport calculateDiscount from \"./discountCalculator\";\n\nconst cart: Product[] = [\n  { id: 1, name: \"Apple\", price: 1.0, quantity: 2, productId: \"apple\" },\n  { id: 2, name: \"Orange\", price: 1.2, quantity: 1, productId: \"orange\" },\n];\n\nconst overallDiscount: Discount = {\n  type: \"overall\",\n  value: 0.1,\n  applicableToAll: true,\n};\nconst thresholdDiscount: Discount = {\n  type: \"threshold\",\n  value: 50,\n  threshold: 2,\n  applicableToAll: true,\n};\nconst bogofDiscount: Discount = {\n  type: \"bogof\",\n  value: 0,\n  applicableToAll: false,\n  applicableProductIds: [\"apple\"],\n};\n\ndescribe(\"calculateDiscount\", () => {\n  it(\"calculates overall discount\", () => {\n    const { discountAmount, finalTotal } = calculateDiscount(\n      cart,\n      overallDiscount,\n    );\n    expect(discountAmount).toBeCloseTo(0.34); // 10% of total\n    expect(finalTotal).toBeCloseTo(3.06); // total - discount\n  });\n\n  it(\"calculates threshold discount\", () => {\n    const { discountAmount, finalTotal } = calculateDiscount(\n      cart,\n      thresholdDiscount,\n    );\n    expect(discountAmount).toBe(50);\n    expect(finalTotal).toBe(0); // total is less than threshold\n  });\n\n  it(\"calculates BOGOF discount\", () => {\n    const { discountAmount, finalTotal } = calculateDiscount(\n      cart,\n      bogofDiscount,\n    );\n    expect(discountAmount).toBe(1.0); // buy one get one free for apple\n    expect(finalTotal).toBeCloseTo(1.2); // total - discount\n  });\n});\n"
+        }
+    ]
+}
