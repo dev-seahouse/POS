@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 9,
+            "activePatchIndex": 12,
             "patches": [
                 {
                     "date": 1717335087956,
@@ -44,6 +44,18 @@
                 {
                     "date": 1717336341840,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,7 +57,7 @@\n       cart,\n       bogofDiscount,\n     );\n     expect(discountAmount).toBe(1.0); // buy one get one free for apple\n-    expect(finalTotal).toBeCloseTo(1.2); // total - discount\n+    expect(finalTotal).toBeCloseTo(2.2); // total - discount\n   });\n });\n"
+                },
+                {
+                    "date": 1717338241459,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,12 +3,8 @@\n   expect,\n   it,\n } from \"vitest\";\n \n-import {\n-  Discount,\n-  Product,\n-} from \"../types\";\n import calculateDiscount from \"./discountCalculator\";\n \n const cart: Product[] = [\n   { id: 1, name: \"Apple\", price: 1.0, quantity: 2, productId: \"apple\" },\n"
+                },
+                {
+                    "date": 1717338248951,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,11 @@\n-import { describe, expect, it } from \"vitest\";\n+import {\n+  describe,\n+  expect,\n+  it,\n+} from \"vitest\";\n \n+import type { Discount } from \"./discount.types\";\n import calculateDiscount from \"./discountCalculator\";\n \n const cart: Product[] = [\n   { id: 1, name: \"Apple\", price: 1.0, quantity: 2, productId: \"apple\" },\n"
+                },
+                {
+                    "date": 1717338258437,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n+import type { Product } from \"src/components/product/product.types\";\n import {\n   describe,\n   expect,\n   it,\n"
                 }
             ],
             "date": 1717335087956,

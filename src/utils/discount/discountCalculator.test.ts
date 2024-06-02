@@ -1,13 +1,7 @@
-import {
-  describe,
-  expect,
-  it,
-} from "vitest";
+import { describe, expect, it } from "vitest";
 
-import {
-  Discount,
-  Product,
-} from "../types";
+import type { Product } from "../../components/product/product.types";
+import type { Discount } from "./discount.types";
 import calculateDiscount from "./discountCalculator";
 
 const cart: Product[] = [
