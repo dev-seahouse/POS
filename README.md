@@ -7,9 +7,9 @@ npm run dev
 ```
 
 ## discount codes
-- OVERALL10      (10% off overall)  
-- BOGOFAPPLE     (buy one apple get 1 apple free)
--THRESHOLD50     ($50 off once cart reach 200) , try 100 banana and 100 orange
+- OVERALL10      (10% off overall)    
+- BOGOFAPPLE     (buy one apple get 1 apple free)  
+-THRESHOLD50     ($50 off once cart reach 200) , try 100 banana and 100 orange  
 
 ## how to run test
 ```
